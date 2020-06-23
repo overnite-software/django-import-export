@@ -548,9 +548,10 @@ class ExportActionMixin(ExportMixin):
         Exports the selected rows using file_format.
         """
         export_format = request.POST.get('file_format')
+        filename = request.POST.get('filename')
 
         if not export_format:
-            messages.warning(request, _('You must select an export format.'))
+            messages.warning(request, _('You must select an export format and define a filename.'))
         else:
             formats = self.get_export_formats()
             file_format = formats[int(export_format)]()
@@ -558,9 +559,7 @@ class ExportActionMixin(ExportMixin):
             export_data = self.get_export_data(file_format, queryset, request=request)
             content_type = file_format.get_content_type()
             response = HttpResponse(export_data, content_type=content_type)
-            response['Content-Disposition'] = 'attachment; filename="%s"' % (
-                self.get_export_filename(request, queryset, file_format),
-            )
+            response['Content-Disposition'] = 'attachment; filename="%s"' % filename
             return response
     export_admin_action.short_description = _(
         'Export selected %(verbose_name_plural)s')
