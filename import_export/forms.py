@@ -41,6 +41,9 @@ class ExportForm(forms.Form):
         label=_('Format'),
         choices=(),
         )
+    filename = forms.CharField(
+        label=_('Filename'),
+        )
 
     def __init__(self, formats, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -64,6 +67,9 @@ def export_action_form_factory(formats):
         """
         file_format = forms.ChoiceField(
             label=_('Format'), choices=formats, required=False)
+        filename = forms.CharField(
+            label=_('Filename'), min_length=1, max_length=32, strip=True,
+            required=True)
     _ExportActionForm.__name__ = str('ExportActionForm')
 
     return _ExportActionForm
