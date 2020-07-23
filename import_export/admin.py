@@ -550,6 +550,23 @@ class ExportActionMixin(ExportMixin):
         export_format = request.POST.get('file_format')
         filename = request.POST.get('filename')
 
+        if int(export_format) == 0:
+            filename += ".csv"
+        elif int(export_format) == 1:
+            filename += ".xls"
+        elif int(export_format) == 2:
+            filename += ".xlsx"
+        elif int(export_format) == 3:
+            filename += ".tsv"
+        elif int(export_format) == 4:
+            filename += ".ods"
+        elif int(export_format) == 5:
+            filename += ".json"
+        elif int(export_format) == 6:
+            filename += ".yaml"
+        else:
+            filename += ".html"
+
         if not export_format:
             messages.warning(request, _('You must select an export format and define a filename.'))
         else:
