@@ -14,7 +14,7 @@
     }
     $actionsSelect.change(function() {
       if ($(this).val() === 'export_admin_action') {
-        $('#changelist-form input[name="filename"]').val("-");
+        $('#changelist-form input[name="filename"]').val("");
         $formatsElement.show();
         $filenameElement.show();
       } else {
