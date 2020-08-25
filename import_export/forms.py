@@ -69,7 +69,7 @@ def export_action_form_factory(formats):
             label=_('Format'), choices=formats, required=False)
         filename = forms.CharField(
             label=_('Filename'), min_length=1, max_length=32, strip=True,
-            required=True)
+            required=False)
     _ExportActionForm.__name__ = str('ExportActionForm')
 
     return _ExportActionForm
